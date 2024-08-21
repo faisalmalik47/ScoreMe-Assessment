@@ -51,17 +51,16 @@ pipeline {
             }
         }
 
-        stage('Publish Plato Report') {
+        stage('Publish Test Report') {
             steps {
+                writeFile file: 'test-report/index.html', text: '<html><body><h1>Test Report</h1></body></html>'
                 publishHTML(target: [
-                    reportDir: './plato-report',
+                    reportDir: 'test-report',
                     reportFiles: 'index.html',
                     keepAll: true,
-                    alwaysLinkToLastBuild: true,
-                    // allowMissing: false
+                    alwaysLinkToLastBuild: true
                 ])
             }
-        }
 
         // Uncomment the stages below if needed
         /*
