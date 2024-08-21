@@ -6,7 +6,8 @@ sudo apt update -y
 sudo apt upgrade -y
 
 # Install Java (OpenJDK 11)
-sudo apt install -y openjdk-11-jdk
+sudo apt install -y openjdk-17-jdk 
+sudo apt install default-jre -y
 
 # Add Jenkins repository
 sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
@@ -35,6 +36,17 @@ https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /
 
 sudo apt update -y
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose
+
+# Download SonarQube Scanner
+wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+
+# Unzip the Scanner
+unzip sonar-scanner-cli-4.7.0.2747-linux.zip
+
+# Move the Scanner to a directory in your PATH
+sudo mv sonar-scanner-4.7.0.2747-linux /opt/sonar-scanner
+sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
+
 
 # Add user to Docker group
 sudo usermod -aG docker ubuntu
