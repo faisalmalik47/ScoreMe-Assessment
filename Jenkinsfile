@@ -4,7 +4,7 @@ pipeline {
     environment {
         SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-creds'
-        SONARQUBE_SERVER = 'http://localhost:9000'
+        SONARQUBE_SERVER = 'http://13.235.76.1:9000'
         SONARQUBE_TOKEN = 'squ_2cd5543f155dfc8c93c55ed94cc5ae6603564a6f'
     }
 
