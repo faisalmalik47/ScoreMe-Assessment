@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('Sonar') {
-                        sh 'sonar-scanner -Dsonar.projectKey=ScoreMe-Assessment -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_b5016581edd7e50d66f8b2b42ad33da3d1a06046'
+                        sh 'sonar-scanner -Dsonar.projectKey=ScoreMe-Assessment -Dsonar.sources=. -Dsonar.host.url=http://3.111.197.232:9000 -Dsonar.token=sqp_23ae8ff6b7641ae6adb93641b11afe649d9b17d0'
                     }
                 }
             }
