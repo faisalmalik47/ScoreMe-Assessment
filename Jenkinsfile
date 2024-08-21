@@ -6,6 +6,8 @@ pipeline {
         SONARQUBE_SCANNER_HOME = tool 'Sonar'
         SLACK_CHANNEL = 'C07J983AQJV' //Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-creds'
+        SONARQUBE_SERVER = http://localhost:9000
+        SONARQUBE_TOKEN = ''
     }
 
     stages {
@@ -28,11 +30,16 @@ pipeline {
         stage('Code Quality') {
             steps {
                 script {
-                    withSonarQubeEnv('Sonar') {
-                        sh 'sonar-scanner -Dsonar.projectKey=ScoreMe-Assessment -Dsonar.sources=. -Dsonar.host.url=http://loalhost:9000 -Dsonar.token=sqp_563023edbe57e69b6500a416fbadd36ecd4757d8'
+                    docker.image('sonarsource/sonar-scanner-cli:latest').inside {
+                        sh """
+                        sonar-scanner \
+                          -Dsonar.projectKey=my_project \
+                          -Dsonar.sources=. \
+                          -Dsonar.host.url=${SONARQUBE_SERVER} \
+                          -Dsonar.token=${SONARQUBE_TOKEN}
+                        """
                     }
                 }
-            }
         }
 
         stage('Code Coverage') {
