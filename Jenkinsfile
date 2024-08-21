@@ -4,8 +4,8 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'simple-node-app'
         SONARQUBE_SCANNER_HOME = tool 'Sonar-Scanner'
-        SLACK_CHANNEL = 'C07J983AQJV'
-        SLACK_CREDENTIALS_ID = 'your-slack-credentials-id'
+        SLACK_CHANNEL = 'C07J983AQJV' #Slack channel ID
+        SLACK_CREDENTIALS_ID = 'slack-creds'
     }
 
     stages {
