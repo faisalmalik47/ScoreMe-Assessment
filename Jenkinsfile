@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo/simple-node-app.git'
+                git 'https://github.com/faisalmalik47/ScoreMe-Assessment.git'
             }
         }
 
