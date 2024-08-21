@@ -30,7 +30,8 @@ pipeline {
                 }
             }
         }
-         stage('NPM install') {
+        
+        stage('NPM install') {
             steps {
                 script {
                     sh "npm install"
@@ -43,11 +44,13 @@ pipeline {
                 sh 'npm run plato'
             }
         }
+
         stage('Archive Reports') {
             steps {
                 archiveArtifacts artifacts: 'plato-report/**/*', allowEmptyArchive: true
             }
         }
+
         stage('Publish Plato Report') {
             steps {
                 publishHTML(target: [
@@ -57,51 +60,54 @@ pipeline {
                     alwaysLinkToLastBuild: true,
                     allowMissing: false
                 ])
-            }        
+            }
+        }
 
-        // stage('Cyclomatic Complexity') {
-        //     steps {
-        //         script {
-        //             sh 'lizard -i -m 10'
-        //         }
-        //     }
-        // }
+        // Uncomment the stages below if needed
+        /*
+        stage('Cyclomatic Complexity') {
+            steps {
+                script {
+                    sh 'lizard -i -m 10'
+                }
+            }
+        }
 
-        // stage('Security Vulnerability Scan') {
-        //     steps {
-        //         script {
-        //             sh 'dependency-check --project simple-node-app --scan .'
-        //         }
-        //     }
-        // }
+        stage('Security Vulnerability Scan') {
+            steps {
+                script {
+                    sh 'dependency-check --project simple-node-app --scan .'
+                }
+            }
+        }
 
+        stage('NPM Run Build') {
+            steps {
+                script {
+                    sh "cd ${CODE_BASE} && npm run build"
+                }
+            }
+        }
 
-        // stage('NPM Run Build') {
-        //     steps {
-        //         script {
-        //             sh "cd ${CODE_BASE} && npm run build"
-        //         }
-        //     }
-        // }
-
-        // stage('Deploy') {
-        //     steps {
-        //         script {
-        //             sh "cp -rf ${CODE_BASE}/build/* /var/www/html/"
-        //         }
-        //     }
-        // }
+        stage('Deploy') {
+            steps {
+                script {
+                    sh "cp -rf ${CODE_BASE}/build/* /var/www/html/"
+                }
+            }
+        }
+        */
     }
 
-    // post {
-    //     always {
-    //         slackSend(channel: SLACK_CHANNEL, color: '#FFFF00', message: "Build #${env.BUILD_NUMBER} completed with status: ${currentBuild.currentResult}")
-    //     }
-    //     success {
-    //         slackSend(channel: SLACK_CHANNEL, color: '#00FF00', message: "Build #${env.BUILD_NUMBER} succeeded! 🎉")
-    //     }
-    //     failure {
-    //         slackSend(channel: SLACK_CHANNEL, color: '#FF0000', message: "Build #${env.BUILD_NUMBER} failed! :x:")
-    //     }
-    // }
+    post {
+        always {
+            slackSend(channel: SLACK_CHANNEL, color: '#FFFF00', message: "Build #${env.BUILD_NUMBER} completed with status: ${currentBuild.currentResult}")
+        }
+        success {
+            slackSend(channel: SLACK_CHANNEL, color: '#00FF00', message: "Build #${env.BUILD_NUMBER} succeeded! 🎉")
+        }
+        failure {
+            slackSend(channel: SLACK_CHANNEL, color: '#FF0000', message: "Build #${env.BUILD_NUMBER} failed! :x:")
+        }
+    }
 }
