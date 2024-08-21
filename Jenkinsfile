@@ -15,15 +15,15 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    sh 'docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} .'
-                    sh 'docker images'
-                    // sh ' yes | docker system prune -a'
-                }
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         script {
+        //             sh 'docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} .'
+        //             sh 'docker images'
+        //             // sh ' yes | docker system prune -a'
+        //         }
+        //     }
+        // }
 
         stage('Code Quality') {
             steps {

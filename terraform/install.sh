@@ -39,6 +39,8 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose
 # Add user to Docker group
 sudo usermod -aG docker ubuntu
 sudo usermod -aG docker jenkins
+newgrp docker
+
 
 # Start Docker service
 sudo systemctl start docker
