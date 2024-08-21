@@ -30,3 +30,21 @@ Copy the password and paste it in jenkins-UI and click continue. and follow basi
 Once the setup is done, go to plugins and install the below plugins,
 
 ![1724250597581](image/Readme/1724250597581.png)
+
+
+Once we are done with these plugin installations, we need to go to manage jenkins > Tools to configure these installed tools, go to the path and scroll down to find out the name of these plugins like "SonarQube Scanner", "Dependency-Check installations"", "Docker installations" and others like that.
+
+
+Open the Tools page is opened click on ass SonarQube Scanner and name it and allow jenkins to install in automatically click on apply and then save. We will Configure other tools like this only.
+
+![1724251386482](image/Readme/1724251386482.png)
+
+
+Do the same for docker but we will not install it automatically as we have already installed it in out jenkins server while provisioninig via install.sh script, click apply and save.
+
+![1724251572577](image/Readme/1724251572577.png)
+
+
+Do the same for Dependency-checker.
+
+![1724251705228](image/Readme/1724251705228.png)

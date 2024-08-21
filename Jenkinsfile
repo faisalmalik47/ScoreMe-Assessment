@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'simple-node-app'
-        SONARQUBE_SCANNER_HOME = tool 'SonarQube Scanner'
+        SONARQUBE_SCANNER_HOME = tool 'Sonar-Scanner'
         SLACK_CHANNEL = '#your-channel'
         SLACK_CREDENTIALS_ID = 'your-slack-credentials-id'
     }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
-                        sh 'sonar-scanner -Dsonar.projectKey=simple-node-app -Dsonar.sources=. -Dsonar.host.url=http://your-sonarqube-url -Dsonar.login=your-sonarqube-token'
+                        sh 'Sonar-Scanner -Dsonar.projectKey=simple-node-app -Dsonar.sources=. -Dsonar.host.url=http://your-sonarqube-url -Dsonar.login=your-sonarqube-token'
                     }
                 }
             }
