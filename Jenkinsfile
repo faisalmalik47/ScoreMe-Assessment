@@ -2,8 +2,6 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'simple-node-app'
-        SONARQUBE_SCANNER_HOME = tool 'Sonar'
         SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-creds'
         SONARQUBE_SERVER = 'http://localhost:9000'
