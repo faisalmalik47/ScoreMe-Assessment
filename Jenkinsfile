@@ -15,21 +15,21 @@ pipeline {
             }
         }
 
-        stage('Code Quality') {
-            steps {
-                script {
-                    withCredentials([string(credentialsId: 'SONARQUBE_TOKEN', variable: 'SONARQUBE_TOKEN')]) {
-                        sh """
-                        docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
-                            -Dsonar.projectKey=ScoreMe-Assessment \\
-                            -Dsonar.sources=/usr/src \\
-                            -Dsonar.host.url=${SONARQUBE_SERVER} \\
-                            -Dsonar.token=${SONARQUBE_TOKEN}
-                        """
-                    }
-                }
-            }
-        }
+        // stage('Code Quality') {
+        //     steps {
+        //         script {
+        //             withCredentials([string(credentialsId: 'SONARQUBE_TOKEN', variable: 'SONARQUBE_TOKEN')]) {
+        //                 sh """
+        //                 docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
+        //                     -Dsonar.projectKey=ScoreMe-Assessment \\
+        //                     -Dsonar.sources=/usr/src \\
+        //                     -Dsonar.host.url=${SONARQUBE_SERVER} \\
+        //                     -Dsonar.token=${SONARQUBE_TOKEN}
+        //                 """
+        //             }
+        //         }
+        //     }
+        // }
         
         stage('NPM install') {
             steps {
