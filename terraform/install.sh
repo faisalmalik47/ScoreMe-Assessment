@@ -6,8 +6,8 @@ sudo apt update -y
 sudo apt upgrade -y
 
 # Install Java (OpenJDK 11)
-sudo apt install -y openjdk-17-jdk 
-sudo apt install default-jre -y
+sudo apt install -y openjdk-21-jdk
+sudo apt install openjdk-21-jre -y
 
 # Add Jenkins repository
 sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
@@ -27,7 +27,7 @@ sudo systemctl enable jenkins
 
 # Install Docker
 sudo apt update -y
-sudo apt install -y ca-certificates curl gnupg lsb-release
+sudo apt install -y ca-certificates curl gnupg lsb-release unzip
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo tee /etc/apt/keyrings/docker.asc > /dev/null
 

@@ -78,7 +78,7 @@ resource "aws_iam_instance_profile" "ssm_profile" {
 # EC2 Instance with IAM Role
 resource "aws_instance" "jenkins" {
   ami           = "ami-0c2af51e265bd5e0e"  # Ubuntu 22.04 AMI ID for ap-south-1
-  instance_type = "t2.medium"               # Instance Type
+  instance_type = "t2.large"               # Instance Type
   key_name      = "demo"                   # SSH key pair
 
   user_data = file("install.sh") # Use the install.sh script as user_data

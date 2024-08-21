@@ -56,7 +56,20 @@ pipeline {
                 }
             }
         }
-
+        stage('NPM install') {
+            steps {
+                script {
+                    sh 'cd /home/ubuntu/ScoreMe-Assessment && npm install'
+                }
+            }
+        }
+        stage('NPM Run Build') {
+            steps {
+                script {
+                    sh 'cd /home/ubuntu/ScoreMe-Assessment && npm run build'
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploy step (can be customized based on your requirements)'
