@@ -28,6 +28,13 @@ services:
     networks:
       - sonarqube_net
 
+  sonarscanner:
+    image: sonarsource/sonar-scanner-cli:latest
+    container_name: sonarscanner
+    networks:
+      - sonarqube_net
+    entrypoint: ["/bin/sh", "-c", "echo 'SonarScanner is ready to use'"]
+
 volumes:
   sonarqube_data:
   sonarqube_logs:

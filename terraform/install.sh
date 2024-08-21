@@ -42,15 +42,15 @@ sudo apt install -y nginx
 sudo systemctl start nginx
 sudo systemctl enable nginx
 
-# Download SonarQube Scanner
-wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+# # Download SonarQube Scanner
+# wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
 
-# Unzip the Scanner
-unzip sonar-scanner-cli-4.7.0.2747-linux.zip
+# # Unzip the Scanner
+# unzip sonar-scanner-cli-4.7.0.2747-linux.zip
 
-# Move the Scanner to a directory in your PATH
-sudo mv sonar-scanner-4.7.0.2747-linux /opt/sonar-scanner
-sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
+# # Move the Scanner to a directory in your PATH
+# sudo mv sonar-scanner-4.7.0.2747-linux /opt/sonar-scanner
+# sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
 
 # Add users to Docker group
 sudo usermod -aG docker ubuntu
