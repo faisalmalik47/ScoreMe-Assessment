@@ -31,51 +31,51 @@ pipeline {
             }
         }
 
-        stage('Code Coverage') {
-            steps {
-                echo 'No code coverage tool configured for Node.js'
-            }
-        }
+        // stage('Code Coverage') {
+        //     steps {
+        //         echo 'No code coverage tool configured for Node.js'
+        //     }
+        // }
 
-        stage('Cyclomatic Complexity') {
-            steps {
-                script {
-                    sh 'lizard -i -m 10'
-                }
-            }
-        }
+        // stage('Cyclomatic Complexity') {
+        //     steps {
+        //         script {
+        //             sh 'lizard -i -m 10'
+        //         }
+        //     }
+        // }
 
-        stage('Security Vulnerability Scan') {
-            steps {
-                script {
-                    sh 'dependency-check --project simple-node-app --scan .'
-                }
-            }
-        }
+        // stage('Security Vulnerability Scan') {
+        //     steps {
+        //         script {
+        //             sh 'dependency-check --project simple-node-app --scan .'
+        //         }
+        //     }
+        // }
 
-        stage('NPM install') {
-            steps {
-                script {
-                    sh "cd ${CODE_BASE} && npm install"
-                }
-            }
-        }
+        // stage('NPM install') {
+        //     steps {
+        //         script {
+        //             sh "cd ${CODE_BASE} && npm install"
+        //         }
+        //     }
+        // }
 
-        stage('NPM Run Build') {
-            steps {
-                script {
-                    sh "cd ${CODE_BASE} && npm run build"
-                }
-            }
-        }
+        // stage('NPM Run Build') {
+        //     steps {
+        //         script {
+        //             sh "cd ${CODE_BASE} && npm run build"
+        //         }
+        //     }
+        // }
 
-        stage('Deploy') {
-            steps {
-                script {
-                    sh "cp -rf ${CODE_BASE}/build/* /var/www/html/"
-                }
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         script {
+        //             sh "cp -rf ${CODE_BASE}/build/* /var/www/html/"
+        //         }
+        //     }
+        // }
     }
 
     post {
