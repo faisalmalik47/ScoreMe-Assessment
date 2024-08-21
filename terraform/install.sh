@@ -60,3 +60,12 @@ newgrp docker <<EOF
     cd ScoreMe-Assessment
     docker-compose up -d
 EOF
+
+sudo apt update -y
+sudo apt install -y curl gnupg
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+node -v
+npm -v
+
+

@@ -30,6 +30,13 @@ pipeline {
                 }
             }
         }
+         stage('NPM install') {
+            steps {
+                script {
+                    sh "npm install"
+                }
+            }
+        }       
 
         stage('Run Complexity Analysis') {
             steps {
@@ -58,13 +65,6 @@ pipeline {
         //     }
         // }
 
-        // stage('NPM install') {
-        //     steps {
-        //         script {
-        //             sh "cd ${CODE_BASE} && npm install"
-        //         }
-        //     }
-        // }
 
         // stage('NPM Run Build') {
         //     steps {
