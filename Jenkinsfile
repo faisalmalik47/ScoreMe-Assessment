@@ -18,16 +18,15 @@ pipeline {
         stage('Code Quality') {
             steps {
                 script {
-                    docker.image('sonarsource/sonar-scanner-cli:latest').inside {
                         sh """
-                        sonar-scanner \
-                          -Dsonar.projectKey=ScoreMe-Assessment \
-                          -Dsonar.sources=. \
-                          -Dsonar.host.url=${SONARQUBE_SERVER} \
-                          -Dsonar.token=${SONARQUBE_TOKEN}
-                          -Dsonar.userHome=/tmp
+                        cd /home/ubuntu/ScoreMe-Assessment && \ 
+                        docker run --rm -v $(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest   sonar-scanner  \
+                        -Dsonar.projectKey=ScoreMe-Assessment   \
+                        -Dsonar.sources=/usr/src   \
+                        -Dsonar.host.url=${SONARQUBE_SERVER}   \
+                        -Dsonar.token=${SONARQUBE_TOKEN}
                         """
-                    }
+                    
                 }
             }
         }
