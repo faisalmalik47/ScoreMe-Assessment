@@ -25,6 +25,7 @@ pipeline {
                           -Dsonar.sources=. \
                           -Dsonar.host.url=${SONARQUBE_SERVER} \
                           -Dsonar.token=${SONARQUBE_TOKEN}
+                          -Dsonar.userHome=/tmp
                         """
                     }
                 }
