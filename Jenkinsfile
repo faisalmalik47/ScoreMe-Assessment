@@ -48,6 +48,16 @@ pipeline {
                 archiveArtifacts artifacts: 'plato-report/**/*', allowEmptyArchive: true
             }
         }
+        stage('Publish Plato Report') {
+            steps {
+                publishHTML(target: [
+                    reportDir: 'plato-report',
+                    reportFiles: 'index.html',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: false
+                ])
+            }        
 
         // stage('Cyclomatic Complexity') {
         //     steps {
