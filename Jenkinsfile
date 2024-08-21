@@ -5,7 +5,6 @@ pipeline {
         SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-creds'
         SONARQUBE_SERVER = 'http://35.154.211.81:9000'
-        // SONARQUBE_TOKEN = 'squ_2cd5543f155dfc8c93c55ed94cc5ae6603564a6f'
         CODE_BASE = '/home/ubuntu/ScoreMe-Assessment'
     }
 
@@ -20,18 +19,17 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'SONARQUBE_TOKEN', variable: 'SONARQUBE_TOKEN')]) {
-                    sh """
-                    docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
-                        -Dsonar.projectKey=ScoreMe-Assessment \\
-                        -Dsonar.sources=/usr/src \\
-                        -Dsonar.host.url="${SONARQUBE_SERVER}" \\
-                        -Dsonar.token="${SONARQUBE_TOKEN}"
-                    """
+                        sh """
+                        docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
+                            -Dsonar.projectKey=ScoreMe-Assessment \\
+                            -Dsonar.sources=/usr/src \\
+                            -Dsonar.host.url=${SONARQUBE_SERVER} \\
+                            -Dsonar.token=${SONARQUBE_TOKEN}
+                        """
+                    }
                 }
-                    
             }
         }
-
 
         stage('Code Coverage') {
             steps {
@@ -58,7 +56,7 @@ pipeline {
         stage('NPM install') {
             steps {
                 script {
-                    sh 'cd "${CODE_BASE}" && npm install'
+                    sh "cd ${CODE_BASE} && npm install"
                 }
             }
         }
@@ -66,14 +64,16 @@ pipeline {
         stage('NPM Run Build') {
             steps {
                 script {
-                    sh 'cd "${CODE_BASE}" && npm run build'
+                    sh "cd ${CODE_BASE} && npm run build"
                 }
             }
         }
 
         stage('Deploy') {
             steps {
-                sh ' cp -rf "${CODE_BASE}"/'
+                script {
+                    sh "cp -rf ${CODE_BASE}/build/* /var/www/html/"
+                }
             }
         }
     }
