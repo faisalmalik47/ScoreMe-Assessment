@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'simple-node-app'
         SONARQUBE_SCANNER_HOME = tool 'Sonar'
-        SLACK_CHANNEL = 'C07J983AQJV' //Slack channel ID
+        SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-creds'
         SONARQUBE_SERVER = 'http://localhost:9000'
         SONARQUBE_TOKEN = 'squ_2cd5543f155dfc8c93c55ed94cc5ae6603564a6f'
@@ -30,6 +30,7 @@ pipeline {
                         """
                     }
                 }
+            }
         }
 
         stage('Code Coverage') {
@@ -53,6 +54,7 @@ pipeline {
                 }
             }
         }
+
         stage('NPM install') {
             steps {
                 script {
@@ -60,6 +62,7 @@ pipeline {
                 }
             }
         }
+
         stage('NPM Run Build') {
             steps {
                 script {
@@ -67,6 +70,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy') {
             steps {
                 echo 'Deploy step (can be customized based on your requirements)'
@@ -76,14 +80,13 @@ pipeline {
 
     post {
         always {
-            slackSend channel: SLACK_CHANNEL, color: '#FFFF00', message: "Build #${env.BUILD_NUMBER} completed with status: ${currentBuild.currentResult}"
+            slackSend(channel: SLACK_CHANNEL, color: '#FFFF00', message: "Build #${env.BUILD_NUMBER} completed with status: ${currentBuild.currentResult}")
         }
         success {
-            slackSend channel: SLACK_CHANNEL, color: '#00FF00', message: "Build #${env.BUILD_NUMBER} succeeded! 🎉"
+            slackSend(channel: SLACK_CHANNEL, color: '#00FF00', message: "Build #${env.BUILD_NUMBER} succeeded! 🎉")
         }
         failure {
-            slackSend channel: SLACK_CHANNEL, color: '#FF0000', message: "Build #${env.BUILD_NUMBER} failed! :x:"
+            slackSend(channel: SLACK_CHANNEL, color: '#FF0000', message: "Build #${env.BUILD_NUMBER} failed! :x:")
         }
     }
-}
 }
