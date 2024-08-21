@@ -1,0 +1,14 @@
+{
+    "name": "simple-node-app",
+    "version": "1.0.0",
+    "description": "A simple Node.js application for CI/CD assessment",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js",
+      "test": "echo \"No tests yet\" && exit 0"
+    },
+    "dependencies": {
+      "express": "^4.17.3"
+    }
+  }
+  
