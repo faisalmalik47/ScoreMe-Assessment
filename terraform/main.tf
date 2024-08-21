@@ -69,6 +69,12 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
   policy_arn  = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
+# IAM Instance Profile for EC2
+resource "aws_iam_instance_profile" "ssm_profile" {
+  name = "ssm-instance-profile-new"
+  role = aws_iam_role.ssm_role.name
+}
+
 # EC2 Instance with IAM Role
 resource "aws_instance" "jenkins" {
   ami           = "ami-0c2af51e265bd5e0e"  # Ubuntu 22.04 AMI ID for ap-south-1
@@ -86,12 +92,23 @@ resource "aws_instance" "jenkins" {
   }
 }
 
-# IAM Instance Profile for EC2
-resource "aws_iam_instance_profile" "ssm_profile" {
-  name = "ssm-instance-profile"
-  role = aws_iam_role.ssm_role.name
+# Create an EBS volume
+resource "aws_ebs_volume" "jenkins_volume" {
+  availability_zone = aws_instance.jenkins.availability_zone
+  size              = 30 # Size in GB
+
+  tags = {
+    Name = "JenkinsVolume"
+  }
 }
 
+# Attach the EBS volume to the EC2 instance
+resource "aws_volume_attachment" "jenkins_volume_attachment" {
+  device_name = "/dev/sdh"  # Device name to attach as in the instance
+  volume_id   = aws_ebs_volume.jenkins_volume.id
+  instance_id = aws_instance.jenkins.id
+}
+  
 # Output the public IP of the instance
 output "instance_public_ip" {
   value = aws_instance.jenkins.public_ip
