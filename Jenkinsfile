@@ -6,6 +6,7 @@ pipeline {
         SLACK_CREDENTIALS_ID = 'slack-creds'
         SONARQUBE_SERVER = 'http://13.235.76.1:9000'
         SONARQUBE_TOKEN = 'squ_2cd5543f155dfc8c93c55ed94cc5ae6603564a6f'
+        CODE_BASE = '/home/ubuntu/ScoreMe-Assessment'
     }
 
     stages {
@@ -55,7 +56,7 @@ pipeline {
         stage('NPM install') {
             steps {
                 script {
-                    sh 'cd /home/ubuntu/ScoreMe-Assessment && npm install'
+                    sh 'cd "${CODE_BASE}" && npm install'
                 }
             }
         }
@@ -63,14 +64,14 @@ pipeline {
         stage('NPM Run Build') {
             steps {
                 script {
-                    sh 'cd /home/ubuntu/ScoreMe-Assessment && npm run build'
+                    sh 'cd "${CODE_BASE}" && npm run build'
                 }
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploy step (can be customized based on your requirements)'
+                sh ' cp -rf "${CODE_BASE}"/'
             }
         }
     }
