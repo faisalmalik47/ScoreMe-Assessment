@@ -19,8 +19,7 @@ pipeline {
             steps {
                 script {
                         sh """
-                        cd /home/ubuntu/ScoreMe-Assessment && \ 
-                        docker run --rm -v $(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest   sonar-scanner  \
+                        cd /home/ubuntu/ScoreMe-Assessment && docker run --rm -v $(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest   sonar-scanner  \
                         -Dsonar.projectKey=ScoreMe-Assessment   \
                         -Dsonar.sources=/usr/src   \
                         -Dsonar.host.url=${SONARQUBE_SERVER}   \
