@@ -48,3 +48,26 @@ Do the same for docker but we will not install it automatically as we have alrea
 Do the same for Dependency-checker.
 
 ![1724251705228](image/Readme/1724251705228.png)
+
+
+Now head to "https://WORKSPACE.slack.com/apps/new/", > Select a channel where you want notifications to be delivered > Add Jenkins CI > Scroll down and click Save settings and follow the recommened steps.
+
+![1724252573767](image/Readme/1724252573767.png)
+
+
+![1724252850405](image/Readme/1724252850405.png)
+
+
+Copy the token and create a secret text in Jenkins credentials and then test the connection.
+
+Creating the Credentials, go to Dashboard > Manage Jenkins > Credentials > System > Global Credentials > Add new credentials, fill the details and then save it like below.
+
+![1724253107675](image/Readme/1724253107675.png)
+
+Setting up slack integration, go to Manage jenkins > system > scroll down to fine Slack section , give exact name of your workspace and select the correct token from credentials and test the connection.
+
+
+![1724253224697](image/Readme/1724253224697.png)
+
+
+we can see that the test connection result was sucess, now save it.
