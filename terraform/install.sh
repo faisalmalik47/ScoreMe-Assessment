@@ -55,6 +55,8 @@ sudo systemctl enable nginx
 # Add users to Docker group
 sudo usermod -aG docker ubuntu
 sudo usermod -aG docker jenkins
+sudo systemctl restart jenkins
+
 
 # Start Docker service
 sudo systemctl start docker
