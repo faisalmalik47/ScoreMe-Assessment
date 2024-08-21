@@ -31,11 +31,16 @@ pipeline {
             }
         }
 
-        // stage('Code Coverage') {
-        //     steps {
-        //         echo 'No code coverage tool configured for Node.js'
-        //     }
-        // }
+        stage('Run Complexity Analysis') {
+            steps {
+                sh 'npm run plato'
+            }
+        }
+        stage('Archive Reports') {
+            steps {
+                archiveArtifacts artifacts: 'plato-report/**/*', allowEmptyArchive: true
+            }
+        }
 
         // stage('Cyclomatic Complexity') {
         //     steps {

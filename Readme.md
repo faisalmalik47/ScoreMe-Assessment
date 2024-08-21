@@ -62,6 +62,28 @@ Go to Dashboard > Manage Jenkins > Credentials > System > Global credentials (un
 ![1724274705058](image/Readme/1724274705058.png)
 
 
+Now go to the "New item", select pipeline and give it a name and thenc lick ok,
+
+![1724275375572](image/Readme/1724275375572.png)
+
+
+Select Pipeline script from SCM select git as scm and provide the github URL sleect branches and other things and the clicke save, then build it.
+
+![1724275431472](image/Readme/1724275431472.png)
+
+We're now done with the sonarqube and basic setups and integrations, let's add more to it now.
+
+![1724275556181](image/Readme/1724275556181.png)
+
+
+
+
+
+
+
+
+
+
 Now head to "https://WORKSPACE.slack.com/apps/new/", > Select a channel where you want notifications to be delivered > Add Jenkins CI > Scroll down and click Save settings and follow the recommened steps.
 
 ![1724252573767](image/Readme/1724252573767.png)
