@@ -54,11 +54,11 @@ pipeline {
         stage('Publish Plato Report') {
             steps {
                 publishHTML(target: [
-                    reportDir: 'plato-report',
+                    reportDir: './plato-report',
                     reportFiles: 'index.html',
                     keepAll: true,
                     alwaysLinkToLastBuild: true,
-                    allowMissing: false
+                    // allowMissing: false
                 ])
             }
         }
