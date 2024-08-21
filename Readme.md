@@ -26,7 +26,41 @@ Copy the password and paste it in jenkins-UI and click continue. and follow basi
 ![1724250106857](image/Readme/1724250106857.png)
 
 
-Once the setup is done, go to IP:9000 to access the sonar
+Once the setup is done, go to IP:9000 to access the sonarQube Server running inside the container, use the default user:pass that's admin:admina nd then setup the password and click update,
+
+
+![1724274176598](image/Readme/1724274176598.png)
+
+Once login go to Administrator > Security > Users, now either create a user or create a token for any existing user.
+
+![1724274234836](image/Readme/1724274234836.png)
+
+
+Copy the token for later use, "squ_0eee735baf39758e817877db5f926eccb726dc92"
+
+![1724274304067](image/Readme/1724274304067.png)
+
+
+Now go to projects and create a new project and populate the required fields and click next.
+
+![1724274370943](image/Readme/1724274370943.png)
+
+
+Click on use global settings and then  click on create project.
+
+
+![1724274392279](image/Readme/1724274392279.png)
+
+It will now ask you how would you want to analyze your code, use locally and select existing token, and use the token we created earlier, and follow the prompt, and then copy the code output.
+
+![1724274521839](image/Readme/1724274521839.png)
+
+Now we have to create the Jenkins Credential to store the token.
+
+Go to Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted) and click on Add Credential, put the token in secret and give any ID. and click create.
+
+![1724274705058](image/Readme/1724274705058.png)
+
 
 Now head to "https://WORKSPACE.slack.com/apps/new/", > Select a channel where you want notifications to be delivered > Add Jenkins CI > Scroll down and click Save settings and follow the recommened steps.
 
