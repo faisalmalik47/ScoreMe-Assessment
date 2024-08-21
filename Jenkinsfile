@@ -51,16 +51,21 @@ pipeline {
             }
         }
 
-        stage('Publish Test Report') {
-            steps {
-                writeFile file: 'test-report/index.html', text: '<html><body><h1>Test Report</h1></body></html>'
-                publishHTML(target: [
-                    reportDir: 'test-report',  // Directory where HTML files are located
-                    reportFiles: 'index.html',      // Main HTML file to be displayed
-                    keepAll: true,                  // Keep all reports
-                    alwaysLinkToLastBuild: true,    // Link to the latest build's report
-                    allowMissing: false             // Fail if report is missing
-                ])
+        // stage('Publish Test Report') {
+        //     steps {
+        //         writeFile file: 'test-report/index.html', text: '<html><body><h1>Test Report</h1></body></html>'
+        //         publishHTML(target: [
+        //             reportDir: 'test-report',  // Directory where HTML files are located
+        //             reportFiles: 'index.html',      // Main HTML file to be displayed
+        //             keepAll: true,                  // Keep all reports
+        //             alwaysLinkToLastBuild: true,    // Link to the latest build's report
+        //             allowMissing: false             // Fail if report is missing
+        //         ])
+        //     }
+        // }
+        stage('Allure Report') {
+        steps {
+            allure includeProperties: false, results: [[path: 'test-report']]
             }
         }
             
