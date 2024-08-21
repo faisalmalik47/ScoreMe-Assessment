@@ -7,7 +7,7 @@ pipeline {
         SLACK_CHANNEL = 'C07J983AQJV' //Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-creds'
         SONARQUBE_SERVER = http://localhost:9000
-        SONARQUBE_TOKEN = ''
+        SONARQUBE_TOKEN = 'squ_2cd5543f155dfc8c93c55ed94cc5ae6603564a6f'
     }
 
     stages {
@@ -33,7 +33,7 @@ pipeline {
                     docker.image('sonarsource/sonar-scanner-cli:latest').inside {
                         sh """
                         sonar-scanner \
-                          -Dsonar.projectKey=my_project \
+                          -Dsonar.projectKey=ScoreMe-Assessment \
                           -Dsonar.sources=. \
                           -Dsonar.host.url=${SONARQUBE_SERVER} \
                           -Dsonar.token=${SONARQUBE_TOKEN}
