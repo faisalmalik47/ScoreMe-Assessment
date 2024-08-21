@@ -27,8 +27,8 @@ pipeline {
         stage('Code Quality') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube') {
-                        sh 'Sonar-Scanner -Dsonar.projectKey=simple-node-app -Dsonar.sources=. -Dsonar.host.url=http://your-sonarqube-url -Dsonar.login=your-sonarqube-token'
+                    withSonarQubeEnv('Sonar-Scanner') {
+                        sh 'Sonar-Scanner -Dsonar.projectKey=simple-node-app -Dsonar.sources=. -Dsonar.host.url=http://localahost:9000 -Dsonar.login=squ_7beca8cc3ae9df723c5d2b9702a9d0be984d49fb'
                     }
                 }
             }

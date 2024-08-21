@@ -42,3 +42,5 @@ sudo apt-get update -y
 sudo yes | apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo systemctl start docker
 sudo systemctl enable docker
+#Launch a sonarqube container on port 9000
+docker run -d --name sonarqube -p 9000:9000 sonarqube:lts

@@ -71,3 +71,20 @@ Setting up slack integration, go to Manage jenkins > system > scroll down to fin
 
 
 we can see that the test connection result was sucess, now save it.
+
+Moving to the next step, we will configure sonarqqube now, head to IP:9000 port where sonarqube is already runnning, which we are using in a docker container that we started while launching the container, default user and pass is admin:admin, login using it and reset the password.
+
+![1724254541672](image/Readme/1724254541672.png)
+
+Now we will be going to the Administration > security and will create a new token and copy it.
+
+![1724254711270](image/Readme/1724254711270.png)
+
+
+We will now create a crenetial of this token as a secret text with the name of sonar-token, like we created earlier. click on create.
+
+![1724254923770](image/Readme/1724254923770.png)
+
+Now go to manage jenkins > system and scroll down to sonarqube server section and configure it. click on save
+
+![1724255054845](image/Readme/1724255054845.png)
