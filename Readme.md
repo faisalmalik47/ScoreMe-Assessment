@@ -187,4 +187,9 @@ It says "NO installation DP-Checker found",
 ![1724446473619](image/Readme/1724446473619.png)
 
 
-Worked now, the issue was with wrong name of DP-Checker, i configured it as DP-Checker
+Worked now, the issue was with wrong name of DP-Checker, i configured it as DP-Checker, its fixed.
+
+![1724454012407](image/Readme/1724454012407.png)
+
+
+Seems to be an issue with Dockerfile, fixed it.
