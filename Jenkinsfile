@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        node {
-            customWorkspace '/mnt/new_volume/jenkins_workspace'
-        }
-    }
+    agent any
         tools {
             jdk 'jdk17'
             nodejs 'node19'
@@ -19,6 +15,7 @@ pipeline {
     }
 
     stages {
+
          stage('Clean Workspace') {
             steps {
                 cleanWs() 
