@@ -149,7 +149,7 @@ pipeline {
             steps {
                 script {
                     // Run the Docker container using the same image name and tag
-                    sh "docker run -d --name chatbot -p 80:3000 faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker run -d --name reddit-clone -p 80:3000 faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         }
