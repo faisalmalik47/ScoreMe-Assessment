@@ -135,7 +135,7 @@ pipeline {
                 }
             }
         }
-        stage('Push Image to Registry')
+        stage('Push Image to Registry'){
             steps{
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
@@ -143,6 +143,7 @@ pipeline {
                 }
                 }
             }
+        }
 
         stage('Deploy to container') {
             steps {
