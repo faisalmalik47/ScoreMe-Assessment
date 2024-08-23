@@ -41,7 +41,7 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
-        
+
         stage('Install Dependencies') {
             steps {
                 script {
@@ -74,11 +74,11 @@ pipeline {
         //         ])
         //     }
         // }
-        stage('Allure Report') {
-        steps {
-            allure includeProperties: false, results: [[path: 'test-report']]
-            }
-        }
+        // stage('Allure Report') {
+        // steps {
+        //     allure includeProperties: false, results: [[path: 'test-report']]
+        //     }
+        // }
             
 
         // Uncomment the stages below if needed
@@ -128,4 +128,26 @@ pipeline {
     //         slackSend(channel: SLACK_CHANNEL, color: '#FF0000', message: "Build #${env.BUILD_NUMBER} failed! :x:")
     //     }
     // }
+
+        stage("Docker Build & Push") {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {   
+                        // Build, tag, and push the Docker image
+                        sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                        sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                        sh "docker push faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to container') {
+            steps {
+                script {
+                    // Run the Docker container using the same image name and tag
+                    sh "docker run -d --name Reddit-Frontend-Container -p 80:3000 faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                }
+            }
+        }
 }
