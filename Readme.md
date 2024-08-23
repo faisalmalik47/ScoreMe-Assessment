@@ -141,3 +141,10 @@ Path:Jenkins file path in GitHub repo.
 ![1724443628202](image/Readme/1724443628202.png)
 
 Click on “Build”.
+
+Got an error., most probably syntax or indentation:
+
+![1724444459537](image/Readme/1724444459537.png)
+
+
+Lets fix it,

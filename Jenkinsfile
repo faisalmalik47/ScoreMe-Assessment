@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    tools{
+    tools {
         jdk 'jdk17'
         nodejs 'node19'
     }
@@ -9,8 +9,9 @@ pipeline {
         SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-creds'
         SONARQUBE_SERVER = 'http://35.154.211.81:9000'
-        CODE_BASE = '/home/ubuntu/ScoreMe-Assessment'
-        SCANNER_HOME=tool 'sonar-scanner'
+        SCANNER_HOME = tool 'sonar-scanner'
+        IMAGE_NAME = 'reddit'
+        IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -23,18 +24,19 @@ pipeline {
         stage('Code Quality') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'Sonar-token', variable: 'Sonar-token')]) {
+                    withCredentials([string(credentialsId: 'Sonar-token', variable: 'SONAR_TOKEN')]) {
                         sh """
                         docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
                             -Dsonar.projectKey=ScoreMe-Assessment \\
                             -Dsonar.sources=/usr/src \\
                             -Dsonar.host.url=${SONARQUBE_SERVER} \\
-                            -Dsonar.token=${SONARQUBE_TOKEN}
+                            -Dsonar.token=${SONAR_TOKEN}
                         """
                     }
                 }
             }
         }
+
         stage('OWASP FS SCAN') {
             steps {
                 dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
@@ -42,13 +44,13 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    sh "npm install"
-                }
-            }
-        }       
+        // stage('Install Dependencies') {
+        //     steps {
+        //         script {
+        //             sh 'npm install'
+        //         }
+        //     }
+        // }       
 
         // stage('Run Complexity Analysis') {
         //     steps {
@@ -75,11 +77,10 @@ pipeline {
         //     }
         // }
         // stage('Allure Report') {
-        // steps {
-        //     allure includeProperties: false, results: [[path: 'test-report']]
+        //     steps {
+        //         allure includeProperties: false, results: [[path: 'test-report']]
         //     }
         // }
-            
 
         // Uncomment the stages below if needed
         /*
@@ -115,21 +116,8 @@ pipeline {
             }
         }
         */
-    }
-
-    // post {
-    //     always {
-    //         slackSend(channel: SLACK_CHANNEL, color: '#FFFF00', message: "Build #${env.BUILD_NUMBER} completed with status: ${currentBuild.currentResult}")
-    //     }
-    //     success {
-    //         slackSend(channel: SLACK_CHANNEL, color: '#00FF00', message: "Build #${env.BUILD_NUMBER} succeeded! 🎉")
-    //     }
-    //     failure {
-    //         slackSend(channel: SLACK_CHANNEL, color: '#FF0000', message: "Build #${env.BUILD_NUMBER} failed! :x:")
-    //     }
-    // }
-
-        stage("Docker Build & Push") {
+        
+        stage('Docker Build & Push') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {   
@@ -146,8 +134,24 @@ pipeline {
             steps {
                 script {
                     // Run the Docker container using the same image name and tag
-                    sh "docker run -d --name Reddit-Frontend-Container -p 80:3000 faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker run -d --name chatbot -p 80:3000 faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         }
+    }
+
+
+    /*
+    post {
+        always {
+            slackSend(channel: SLACK_CHANNEL, color: '#FFFF00', message: "Build #${env.BUILD_NUMBER} completed with status: ${currentBuild.currentResult}")
+        }
+        success {
+            slackSend(channel: SLACK_CHANNEL, color: '#00FF00', message: "Build #${env.BUILD_NUMBER} succeeded! 🎉")
+        }
+        failure {
+            slackSend(channel: SLACK_CHANNEL, color: '#FF0000', message: "Build #${env.BUILD_NUMBER} failed! :x:")
+        }
+    }
+    */
 }
