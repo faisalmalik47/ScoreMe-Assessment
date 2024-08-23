@@ -36,11 +36,11 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose
 
 # Install Nginx
 sudo apt update -y
-sudo apt install -y nginx
+sudo apt install -y apache2
 
 # Start Nginx service
-sudo systemctl start nginx
-sudo systemctl enable nginx
+sudo systemctl start apache2
+sudo systemctl enable apache2
 
 # Add users to Docker group
 sudo usermod -aG docker ubuntu

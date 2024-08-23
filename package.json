@@ -1,44 +1,38 @@
 {
-  "name": "calculator",
+  "name": "reddit-clone",
   "version": "0.1.0",
-  "license": "MIT",
-  "homepage": "http://ahfarmer.github.io/calculator",
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "complexity-report": "^2.0.0-alpha",
-    "gh-pages": "^2.0.1",
-    "plato": "^1.7.0",
-    "prettier": "^1.17.1",
-    "react-scripts": "^3.0.1"
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "big.js": "^5.2.2",
-    "github-fork-ribbon-css": "^0.2.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/next-js": "^2.2.0",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/open-sans": "^5.0.28",
+    "@fontsource/raleway": "^5.0.19",
+    "@next/bundle-analyzer": "^14.2.5",
+    "firebase": "^10.12.4",
+    "framer-motion": "^11.3.14",
+    "next": "14.2.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "recoil": "^0.7.7"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build",
-    "complexity": "complexity-report src --output complexity-report.html",
-    "plato": "plato -r -d plato-report src"
-  },
-  "prettier": {
-    "trailingComma": "all"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }

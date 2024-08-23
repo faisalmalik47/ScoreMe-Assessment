@@ -1,11 +1,16 @@
 pipeline {
     agent any
+    tools{
+        jdk 'jdk17'
+        nodejs 'node19'
+    }
 
     environment {
         SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-creds'
         SONARQUBE_SERVER = 'http://35.154.211.81:9000'
         CODE_BASE = '/home/ubuntu/ScoreMe-Assessment'
+        SCANNER_HOME=tool 'sonar-scanner'
     }
 
     stages {
@@ -15,23 +20,29 @@ pipeline {
             }
         }
 
-        // stage('Code Quality') {
-        //     steps {
-        //         script {
-        //             withCredentials([string(credentialsId: 'SONARQUBE_TOKEN', variable: 'SONARQUBE_TOKEN')]) {
-        //                 sh """
-        //                 docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
-        //                     -Dsonar.projectKey=ScoreMe-Assessment \\
-        //                     -Dsonar.sources=/usr/src \\
-        //                     -Dsonar.host.url=${SONARQUBE_SERVER} \\
-        //                     -Dsonar.token=${SONARQUBE_TOKEN}
-        //                 """
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Code Quality') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'Sonar-token', variable: 'Sonar-token')]) {
+                        sh """
+                        docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
+                            -Dsonar.projectKey=ScoreMe-Assessment \\
+                            -Dsonar.sources=/usr/src \\
+                            -Dsonar.host.url=${SONARQUBE_SERVER} \\
+                            -Dsonar.token=${SONARQUBE_TOKEN}
+                        """
+                    }
+                }
+            }
+        }
+        stage('OWASP FS SCAN') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
         
-        stage('NPM install') {
+        stage('Install Dependencies') {
             steps {
                 script {
                     sh "npm install"
@@ -39,17 +50,17 @@ pipeline {
             }
         }       
 
-        stage('Run Complexity Analysis') {
-            steps {
-                sh 'npm run plato'
-            }
-        }
+        // stage('Run Complexity Analysis') {
+        //     steps {
+        //         sh 'npm run plato'
+        //     }
+        // }
 
-        stage('Archive Reports') {
-            steps {
-                archiveArtifacts artifacts: 'plato-report/**/*', allowEmptyArchive: true
-            }
-        }
+        // stage('Archive Reports') {
+        //     steps {
+        //         archiveArtifacts artifacts: 'plato-report/**/*', allowEmptyArchive: true
+        //     }
+        // }
 
         // stage('Publish Test Report') {
         //     steps {
