@@ -61,6 +61,29 @@ Click on Tokens, Create one and save it.
 
 ![1724442421488](image/Readme/1724442421488.png)
 
+Now Navigate to Projects → Create a local project → Fill in details and click next.
+
+![1724445576074](image/Readme/1724445576074.png)
+
+
+Use the global setting and click Create project
+
+![1724445601533](image/Readme/1724445601533.png)
+
+
+Once project is created click on Locally.
+
+![1724445644025](image/Readme/1724445644025.png)
+
+Select use existing token and click continue:
+
+![1724445700520](image/Readme/1724445700520.png)
+
+Select Others and copy the command, we will use it in our pipeline.
+
+![1724445716515](image/Readme/1724445716515.png)
+
+
 
 Now in Jenkins Navigate to Manage Jenkins → Plugins →Available Plugins and install the following.
 
