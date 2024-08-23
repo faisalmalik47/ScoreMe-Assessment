@@ -84,7 +84,6 @@ Select Others and copy the command, we will use it in our pipeline.
 ![1724445716515](image/Readme/1724445716515.png)
 
 
-
 Now in Jenkins Navigate to Manage Jenkins → Plugins →Available Plugins and install the following.
 
 
@@ -176,3 +175,13 @@ Got it fixed and pipeline failed again,
 
 
 Issue:  Incorrect SonarQube Server URL, let me fix it and rerun the pipeline.
+
+It was a simple URL mismatch error, now that our COde Quality stage is passed and successful, let's fix OWASP FS SCAN stage.
+
+![1724446386381](image/Readme/1724446386381.png)
+
+
+It says "NO installation DP-Checker found",
+
+
+![1724446473619](image/Readme/1724446473619.png)
