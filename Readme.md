@@ -258,3 +258,10 @@ Now go to Manage Jenkins → System and look for slack section, give Workspace n
 
 
 The test is successful.
+
+Lets test our pipeline now, for the time being i have commented the stages of pipeline where it takes too much time to only test this stage, build completed successfuly and we recieved the message, lets modify it a little bit. 
+
+![1724455631018](image/Readme/1724455631018.png)
+
+
+![1724455851824](image/Readme/1724455851824.png)
