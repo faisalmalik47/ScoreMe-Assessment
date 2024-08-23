@@ -192,4 +192,69 @@ Worked now, the issue was with wrong name of DP-Checker, i configured it as DP-C
 ![1724454012407](image/Readme/1724454012407.png)
 
 
-Seems to be an issue with Dockerfile, fixed it.
+![1724454369567](image/Readme/1724454369567.png)
+
+
+Seems to be an issue with Dockerfile, fixed it. 
+
+
+![1724454310866](image/Readme/1724454310866.png)
+
+
+Lets configure, notifcation and Failture Handling now.
+
+Configuring Slack,
+
+go to the URL "https://yourworkspace.slack.com/apps/A0F7VRFKN-jenkins-ci?tab=more_info" to integrate Jenkins CI tool.
+
+
+![1724454556926](image/Readme/1724454556926.png)
+
+
+Click on Add to Slack
+
+
+![1724454583367](image/Readme/1724454583367.png)
+
+
+Click on create new channel and give it a name and click next and then click create.
+
+Select the created Channel from the drop down menu.
+
+![1724454716724](image/Readme/1724454716724.png)
+
+
+Click on Add Jenkins CI Integration, scroll down and copy the generated token.
+
+
+![1724454776593](image/Readme/1724454776593.png)
+
+
+
+Click on save settings.
+
+![1724454794185](image/Readme/1724454794185.png)
+
+
+Lets Integrate Slack to our Jenkins.
+
+
+In Jenkins Navigate to Manage Jenkins → Plugins →Available Plugins and install the slack notifiction plugin.
+
+
+![1724454906519](image/Readme/1724454906519.png)
+
+
+Now go to Manage Jenkins → Credentials → System → Global Credentials → Add Credential
+
+Put token from Slack ins ecret and name it, then click on create.
+
+![1724455070480](image/Readme/1724455070480.png)
+
+Now go to Manage Jenkins → System and look for slack section, give Workspace name and select the previously created credential, then click on test connection.
+
+
+![1724455257763](image/Readme/1724455257763.png)
+
+
+The test is successful.

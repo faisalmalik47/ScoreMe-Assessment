@@ -6,8 +6,8 @@ pipeline {
         }
 
     environment {
-        SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
-        SLACK_CREDENTIALS_ID = 'slack-creds'
+        // SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
+        SLACK_CREDENTIALS_ID = 'slack-token'
         SONARQUBE_SERVER = 'http://65.1.94.192:9000'
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = 'reddit'
@@ -162,11 +162,8 @@ pipeline {
     }
 
 
-    /*
+
     post {
-        always {
-            slackSend(channel: SLACK_CHANNEL, color: '#FFFF00', message: "Build #${env.BUILD_NUMBER} completed with status: ${currentBuild.currentResult}")
-        }
         success {
             slackSend(channel: SLACK_CHANNEL, color: '#00FF00', message: "Build #${env.BUILD_NUMBER} succeeded! 🎉")
         }
@@ -174,5 +171,4 @@ pipeline {
             slackSend(channel: SLACK_CHANNEL, color: '#FF0000', message: "Build #${env.BUILD_NUMBER} failed! :x:")
         }
     }
-    */
 }
