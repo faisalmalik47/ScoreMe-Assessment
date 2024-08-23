@@ -3,11 +3,11 @@ pipeline {
         node {
             customWorkspace '/mnt/new_volume/jenkins_workspace'
         }
+    }
         tools {
             jdk 'jdk17'
             nodejs 'node19'
         }
-    }
 
     environment {
         SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
