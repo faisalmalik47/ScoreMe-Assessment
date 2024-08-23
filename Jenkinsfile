@@ -130,7 +130,6 @@ pipeline {
                         // Build, tag, and push the Docker image
                         sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
                         sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
-                        sh "docker push faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
                     }
                 }
             }
