@@ -8,7 +8,7 @@ pipeline {
     environment {
         SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-creds'
-        SONARQUBE_SERVER = 'http://35.154.211.81:9000'
+        SONARQUBE_SERVER = 'sonar-server'
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = 'reddit'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
@@ -24,7 +24,7 @@ pipeline {
         stage('Code Quality') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'Sonar-token', variable: 'SONAR_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'Sonar-token', variable: 'Sonar-token')]) {
                         sh """
                         docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
                             -Dsonar.projectKey=ScoreMe-Assessment \\

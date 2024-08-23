@@ -147,4 +147,9 @@ Got an error., most probably syntax or indentation:
 ![1724444459537](image/Readme/1724444459537.png)
 
 
-Lets fix it,
+Got it fixed and pipeline failed again,
+
+![1724444829904](image/Readme/1724444829904.png)![1724444857214](image/Readme/1724444857214.png)
+
+
+Issue:  Incorrect SonarQube Server URL, let me fix it and rerun the pipeline.
