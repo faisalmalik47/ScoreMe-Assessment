@@ -30,7 +30,7 @@ pipeline {
                             -Dsonar.projectKey=ScoreMe-Assessment \\
                             -Dsonar.sources=/usr/src \\
                             -Dsonar.host.url=${SONARQUBE_SERVER} \\
-                            -Dsonar.token=${SONAR_TOKEN}
+                            -Dsonar.token=${Sonar-token}
                         """
                     }
                 }
