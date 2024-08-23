@@ -1,8 +1,12 @@
 pipeline {
-    agent any
-    tools {
-        jdk 'jdk17'
-        nodejs 'node19'
+    agent {
+        node {
+            customWorkspace '/mnt/new_volume/jenkins_workspace'
+        }
+        tools {
+            jdk 'jdk17'
+            nodejs 'node19'
+        }
     }
 
     environment {

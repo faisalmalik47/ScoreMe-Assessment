@@ -180,6 +180,7 @@ It was a simple URL mismatch error, now that our COde Quality stage is passed an
 
 ![1724446386381](image/Readme/1724446386381.png)
 
+![1724447913345](image/Readme/1724447913345.png)
 
 It says "NO installation DP-Checker found",
 
