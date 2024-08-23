@@ -142,16 +142,12 @@ pipeline {
     post {
         success {
             script {
-                slackSend(color: 'good', message: "Deployment on ${env.JOB_NAME} succeeded! Build Number - ${env.BUILD_NUMBER}, New codebase is live now. 
-                        Job built by ${env.BUILD_USER_NAME}
-                        Job URL:  ${env.BUILD_URL}")
+                slackSend(color: 'good', message: "Deployment on ${env.JOB_NAME} succeeded! Build Number - ${env.BUILD_NUMBER}, New codebase is live now. Job built by ${env.BUILD_USER_NAME} , Job URL:  ${env.BUILD_URL}")
             }
         }
         failure {
             script {
-                slackSend(color: 'good', message: "Deployment on ${env.JOB_NAME} succeeded! Build Number - ${env.BUILD_NUMBER}, New codebase is live now. 
-                Job built by ${env.BUILD_USER_NAME}
-                Job URL:  ${env.BUILD_URL}")
+                slackSend(color: 'good', message: "Deployment on ${env.JOB_NAME} succeeded! Build Number - ${env.BUILD_NUMBER}, New codebase is live now.  Job built by ${env.BUILD_USER_NAME} , Job URL:  ${env.BUILD_URL}")
             }
         }
     }
