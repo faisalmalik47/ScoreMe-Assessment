@@ -123,7 +123,7 @@ pipeline {
         }
         */
         
-        stage('Docker Build & Push') {
+        stage('Docker Build') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {   
@@ -135,6 +135,14 @@ pipeline {
                 }
             }
         }
+        stage('Push Image to Registry')
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh "docker push faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                }
+                }
+            }
 
         stage('Deploy to container') {
             steps {
