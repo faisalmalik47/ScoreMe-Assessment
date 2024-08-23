@@ -19,6 +19,11 @@ pipeline {
     }
 
     stages {
+         stage('Clean Workspace') {
+            steps {
+                cleanWs() 
+            }
+        }       
         stage('Checkout') {
             steps {
                 git 'https://github.com/faisalmalik47/ScoreMe-Assessment.git'
