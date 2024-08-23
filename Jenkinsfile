@@ -8,7 +8,7 @@ pipeline {
     environment {
         SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-creds'
-        SONARQUBE_SERVER = 'sonar-server'
+        SONARQUBE_SERVER = 'http://65.1.94.192:9000'
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = 'reddit'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
