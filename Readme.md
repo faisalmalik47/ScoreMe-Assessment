@@ -184,5 +184,7 @@ It was a simple URL mismatch error, now that our COde Quality stage is passed an
 
 It says "NO installation DP-Checker found",
 
-
 ![1724446473619](image/Readme/1724446473619.png)
+
+
+Worked now, the issue was with wrong name of DP-Checker, i configured it as DP-Checker
