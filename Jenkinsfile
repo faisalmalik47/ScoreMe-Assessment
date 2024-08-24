@@ -85,17 +85,14 @@ pipeline {
         stage('Trivy Image Scan'){
             steps{
                 script{
-                    sh """
-                        sudo docker run aquasec/trivy image ${IMAGE_NAME}:${IMAGE_TAG} > ${TRIVY_OUTPUT_FILE} 2>&1
-                    """
+                    sh "sudo docker run aquasec/trivy image ${IMAGE_NAME}:${IMAGE_TAG} > ${TRIVY_OUTPUT_FILE} 2>&1"
                 }
             }
         }
         stage('Trivy Code Scan'){
             steps{
                 script{
-                    sh "docker run --rm -v "$(pwd)":/root/code aquasec/trivy fs . > ${TRUVY_FS_SCAN} 2>&1
-"
+                    sh "sudo docker run --rm -v "$(pwd)":/root/code aquasec/trivy fs . > ${TRUVY_FS_SCAN} 2>&1"
                 }
             }
         }
