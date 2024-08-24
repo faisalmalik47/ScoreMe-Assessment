@@ -350,3 +350,12 @@ I've made a mistake in Dockerfile knowingly to test the failure handling.
 As we can see below the current build number is 37, but in failure it reverted to the previous successfully build image which was done in build no. 36.
 
 ![1724460098361](image/Readme/1724460098361.png)
+
+
+**ADDONS:**
+
+Let configure trivy as well for image scaning. Lets add a stage and we will be using trivy in a container for cleaner approach. Simple commands are being used in these stages.
+
+docker run aquasec/trivy image faisalmaliik/reddit:`<tag>`
+
+docker run --rm -v \$(pwd):/root/code aquasec/trivy fs .

@@ -11,6 +11,8 @@ pipeline {
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = 'reddit'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
+        TRIVY_OUTPUT_FILE = "trivy-scan-${env.BUILD_NUMBER}.txt"
+        TRUVY_FS_SCAN="trivy-fs-scan-${env.BUILD_NUMBER}.txt"
     }
 
     stages {
@@ -77,6 +79,23 @@ pipeline {
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
                         sh "docker push faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
                 }
+                }
+            }
+        }
+        stage('Trivy Image Scan'){
+            steps{
+                script{
+                    sh """
+                        sudo docker run aquasec/trivy image ${IMAGE_NAME}:${IMAGE_TAG} > ${TRIVY_OUTPUT_FILE} 2>&1
+                    """
+                }
+            }
+        }
+        stage('Trivy Code Scan'){
+            steps{
+                script{
+                    sh "docker run --rm -v "$(pwd)":/root/code aquasec/trivy fs . > ${TRUVY_FS_SCAN} 2>&1
+"
                 }
             }
         }
