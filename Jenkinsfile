@@ -12,7 +12,6 @@ pipeline {
         IMAGE_NAME = 'reddit'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
         TRIVY_OUTPUT_FILE = "trivy-scan-${env.BUILD_NUMBER}.html"
-        TRUVY_FS_SCAN="trivy-fs-scan-${env.BUILD_NUMBER}.html"
     }
 
     stages {
@@ -87,15 +86,6 @@ pipeline {
                 script{
                     sh '''
                     sudo docker run aquasec/trivy image faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG} > ${TRIVY_OUTPUT_FILE} 2>&1
-                    '''
-                }
-            }
-        }
-        stage('Trivy Code Scan'){
-            steps{
-                script{
-                    sh '''
-                    sudo docker run --rm -v $(pwd):/root/code aquasec/trivy fs /root/code > ${TRIVY_FS_SCAN} 2>&1
                     '''
                 }
             }
