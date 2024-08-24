@@ -90,7 +90,7 @@ pipeline {
                 }
             }
         }
-        stage('Publish HTML Report') {
+        stage('Publish Trivy Scan Report') {
             steps {
                 publishHTML([
                     target: [
