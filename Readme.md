@@ -357,3 +357,39 @@ As we can see below the current build number is 37, but in failure it reverted t
 Lets add a stage and we will be using trivy in a container for cleaner approach. Simple command is being used in this stage.
 
 docker run aquasec/trivy image faisalmaliik/reddit:`<tag>`
+
+Perfect!!
+
+
+![1724463713757](image/Readme/1724463713757.png)
+
+
+![1724466008539](image/Readme/1724466008539.png)
+
+
+Scan report:
+
+
+![1724466060496](image/Readme/1724466060496.png)
+
+
+Now for the final part lets make this pipeline auto trigger on every new commit on Master branch.
+
+
+Navigate to githubRepo --> Settings --> Webhooks --> Add Webhook
+
+
+![1724466188947](image/Readme/1724466188947.png)
+
+
+Populate the details like below:
+
+![1724466292437](image/Readme/1724466292437.png)
+
+
+click Add Webhook, and its successful.
+
+![1724466321221](image/Readme/1724466321221.png)
+
+
+Lets test it now.
