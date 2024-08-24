@@ -128,7 +128,7 @@ pipeline {
         }
         failure {
             script {
-                slackSend(color: 'danger', message: "Deployment on ${env.JOB_NAME} Failed! Build Number - ${env.BUILD_NUMBER}, Reverted to Previous successfull build.  Job built by ${env.BUILD_USER_NAME} , Job URL:  ${env.BUILD_URL}")
+                slackSend(color: 'danger', message: "Deployment on ${env.JOB_NAME} Failed! Build Number - ${env.BUILD_NUMBER}, Reverted to Previous successfull build ( Build no.: ${imageTag} ).  Job built by ${env.BUILD_USER_NAME} , Job URL:  ${env.BUILD_URL}")
                 def previousBuildFile = '/var/lib/jenkins/previous_successful_build.txt'
                 def previousBuildNumber = ''
                 if (fileExists(previousBuildFile)) {
