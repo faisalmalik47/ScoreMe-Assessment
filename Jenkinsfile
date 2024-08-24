@@ -90,7 +90,19 @@ pipeline {
                 }
             }
         }
-
+        stage('Publish HTML Report') {
+            steps {
+                publishHTML([
+                    target: [
+                        reportDir: '.',         
+                        reportFiles: '${TRIVY_OUTPUT_FILE}',  
+                        keepAll: true,                
+                        alwaysLinkToLastBuild: true,  
+                        allowMissing: false  
+                    ]
+                ])
+            }
+        }
         stage('Deploy to container') {
             steps {
                 script {

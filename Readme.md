@@ -354,8 +354,6 @@ As we can see below the current build number is 37, but in failure it reverted t
 
 **ADDONS:**
 
-Let configure trivy as well for image scaning. Lets add a stage and we will be using trivy in a container for cleaner approach. Simple commands are being used in these stages.
+Lets add a stage and we will be using trivy in a container for cleaner approach. Simple command is being used in this stage.
 
 docker run aquasec/trivy image faisalmaliik/reddit:`<tag>`
-
-docker run --rm -v \$(pwd):/root/code aquasec/trivy fs .
