@@ -103,15 +103,16 @@ pipeline {
     post {
         success {
             script {
+                slackSend(color: 'good', message: "Deployment on ${env.JOB_NAME} succeeded! Build Number - ${env.BUILD_NUMBER}, New codebase is live now. Job built by ${env.BUILD_USER_NAME} , Job URL:  ${env.BUILD_URL}")
                 def previousBuildFile = '/var/lib/jenkins/previous_successful_build.txt'
                 def buildNumber = env.BUILD_NUMBER
                 sh "echo ${buildNumber} > ${previousBuildFile}"
-                slackSend(color: 'good', message: "Deployment on ${env.JOB_NAME} succeeded! Build Number - ${env.BUILD_NUMBER}, New codebase is live now. Job built by ${env.BUILD_USER_NAME} , Job URL:  ${env.BUILD_URL}")
                 sh "docker system prune -f"
             }
         }
         failure {
             script {
+                slackSend(color: 'good', message: "Deployment on ${env.JOB_NAME} succeeded! Build Number - ${env.BUILD_NUMBER}, New codebase is live now.  Job built by ${env.BUILD_USER_NAME} , Job URL:  ${env.BUILD_URL}")
                 def previousBuildFile = '/var/lib/jenkins/previous_successful_build.txt'
                 def previousBuildNumber = ''
                 if (fileExists(previousBuildFile)) {
@@ -131,7 +132,6 @@ pipeline {
                 else {
                 error "Previous successful build file not found or is empty. Cannot deploy."
             }
-                slackSend(color: 'good', message: "Deployment on ${env.JOB_NAME} succeeded! Build Number - ${env.BUILD_NUMBER}, New codebase is live now.  Job built by ${env.BUILD_USER_NAME} , Job URL:  ${env.BUILD_URL}")
                 sh "docker system prune -f"
             }
         }
