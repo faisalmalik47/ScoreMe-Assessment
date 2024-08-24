@@ -93,8 +93,8 @@ pipeline {
         stage('Publish Trivy Scan Report') {
             steps {
                 script {
-                    sh "ls -l ${trivyOutputFile}"
                     def trivyOutputFile = "trivy-scan-${env.BUILD_NUMBER}.html"
+                    sh "ls -l ${trivyOutputFile}"
                     publishHTML([
                         target: [
                             reportDir: '.',         
