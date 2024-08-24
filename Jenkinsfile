@@ -92,7 +92,7 @@ pipeline {
         stage('Trivy Code Scan'){
             steps{
                 script{
-                    sh "sudo docker run --rm -v "$(pwd)":/root/code aquasec/trivy fs . > ${TRUVY_FS_SCAN} 2>&1"
+                    sh "sudo docker run --rm -v $(pwd):/root/code aquasec/trivy fs /root/code > ${TRIVY_FS_SCAN} 2>&1"
                 }
             }
         }
