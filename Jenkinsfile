@@ -92,10 +92,11 @@ pipeline {
         }
         stage('Publish Trivy Scan Report') {
             steps {
+                def trivyOutputFile = "trivy-scan-${env.BUILD_NUMBER}.html"
                 publishHTML([
                     target: [
                         reportDir: '.',         
-                        reportFiles: '${TRIVY_OUTPUT_FILE}',  
+                        reportFiles: trivyOutputFile,  
                         keepAll: true,                
                         alwaysLinkToLastBuild: true,  
                         allowMissing: false  
