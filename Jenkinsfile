@@ -27,28 +27,28 @@ pipeline {
             }
         }
 
-        // stage('Code Quality') {
-        //     steps {
-        //         script {
-        //             withCredentials([string(credentialsId: 'Sonar-token', variable: 'SONAR_TOKEN')]) {
-        //                 sh """
-        //                 docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
-        //                     -Dsonar.projectKey=ScoreMeAssessment \\
-        //                     -Dsonar.sources=/usr/src \\
-        //                     -Dsonar.host.url=${SONARQUBE_SERVER} \\
-        //                     -Dsonar.token=${SONAR_TOKEN}
-        //                 """
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Code Quality') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'Sonar-token', variable: 'SONAR_TOKEN')]) {
+                        sh """
+                        docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
+                            -Dsonar.projectKey=ScoreMeAssessment \\
+                            -Dsonar.sources=/usr/src \\
+                            -Dsonar.host.url=${SONARQUBE_SERVER} \\
+                            -Dsonar.token=${SONAR_TOKEN}
+                        """
+                    }
+                }
+            }
+        }
 
-        // stage('OWASP FS SCAN') {
-        //     steps {
-        //         dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Checker'
-        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-        //     }
-        // }
+        stage('OWASP FS SCAN') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Checker'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
 
 
         /*
