@@ -72,15 +72,15 @@ pipeline {
                 }
             }
         }
-        // stage('Push Image to Registry'){
-        //     steps{
-        //         script{
-        //             withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
-        //                 sh "docker push faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
-        //         }
-        //         }
-        //     }
-        // }
+        stage('Push Image to Registry'){
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh "docker push faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                }
+                }
+            }
+        }
         stage('Trivy Image Scan'){
             steps{
                 script{
