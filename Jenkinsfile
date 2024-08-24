@@ -90,23 +90,6 @@ pipeline {
                 }
             }
         }
-        stage('Publish Trivy Scan Report') {
-            steps {
-                script {
-                    def trivyOutputFile = "trivy-scan-${env.BUILD_NUMBER}.html"
-                    sh "ls -l ${trivyOutputFile}"
-                    publishHTML([
-                        target: [
-                            reportDir: '.',         
-                            reportFiles: trivyOutputFile,  
-                            keepAll: true,                
-                            alwaysLinkToLastBuild: true,  
-                            allowMissing: false  
-                            ]
-                        ])
-                }
-            }
-        }
         stage('Deploy to container') {
             steps {
                 script {
