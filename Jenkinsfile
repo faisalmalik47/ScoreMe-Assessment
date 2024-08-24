@@ -91,7 +91,7 @@ pipeline {
                     """
                     
                     // Run the Docker container using the same image name and tag
-                    sh "docker run -d --name reddit-clone -p 80:3000 faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker run -d --name reddit-clone -p 80:5173 faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         }
@@ -126,7 +126,7 @@ pipeline {
                             docker stop reddit-clone || true
                             docker rm reddit-clone || true
                         """
-                        sh "docker run -d --name reddit-clone -p 80:3000 faisalmaliik/${imageTag}"
+                        sh "docker run -d --name reddit-clone -p 80:5173 faisalmaliik/${imageTag}"
                     }
                 }
                 else {
