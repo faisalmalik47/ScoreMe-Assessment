@@ -85,7 +85,7 @@ pipeline {
         stage('Trivy Image Scan'){
             steps{
                 script{
-                    sh "sudo docker run aquasec/trivy image ${IMAGE_NAME}:${IMAGE_TAG} > ${TRIVY_OUTPUT_FILE} 2>&1"
+                    sh "sudo docker run aquasec/trivy image faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG} > ${TRIVY_OUTPUT_FILE} 2>&1"
                 }
             }
         }
