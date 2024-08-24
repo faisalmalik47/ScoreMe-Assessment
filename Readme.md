@@ -392,4 +392,16 @@ click Add Webhook, and its successful.
 ![1724466321221](image/Readme/1724466321221.png)
 
 
+Now in jenkins Navigate to pipeline --> configure --> in build trigger section select the "GitHub hook trigger for GITScm polling" option and we're done.
+
+
+![1724466668415](image/Readme/1724466668415.png)
+
 Lets test it now.
+
+It works perfectly!!
+
+![1724466547353](image/Readme/1724466547353.png)
+
+
+![1724466556134](image/Readme/1724466556134.png)
