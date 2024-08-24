@@ -1,7 +1,3 @@
 {
-  "greeting": "Hello, Welcome!",
-  "description": {
-    "line1": "Hello There!! ",
-    "line2": "How are you doing? :)"
-  }
+  "greeting": "Hello, Welcome!"
 }
