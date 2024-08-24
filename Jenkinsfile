@@ -17,7 +17,7 @@ pipeline {
 
          stage('Clean Workspace') {
             steps {
-                cleanWs() s
+                cleanWs()
             }
         }       
         stage('Checkout') {
@@ -26,28 +26,28 @@ pipeline {
             }
         }
 
-        // stage('Code Quality') {
-        //     steps {
-        //         script {
-        //             withCredentials([string(credentialsId: 'Sonar-token', variable: 'SONAR_TOKEN')]) {
-        //                 sh """
-        //                 docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
-        //                     -Dsonar.projectKey=ScoreMeAssessment \\
-        //                     -Dsonar.sources=/usr/src \\
-        //                     -Dsonar.host.url=${SONARQUBE_SERVER} \\
-        //                     -Dsonar.token=${SONAR_TOKEN}
-        //                 """
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Code Quality') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'Sonar-token', variable: 'SONAR_TOKEN')]) {
+                        sh """
+                        docker run --rm -v \$(pwd):/usr/src --network=host sonarsource/sonar-scanner-cli:latest sonar-scanner \\
+                            -Dsonar.projectKey=ScoreMeAssessment \\
+                            -Dsonar.sources=/usr/src \\
+                            -Dsonar.host.url=${SONARQUBE_SERVER} \\
+                            -Dsonar.token=${SONAR_TOKEN}
+                        """
+                    }
+                }
+            }
+        }
 
-        // stage('OWASP FS SCAN') {
-        //     steps {
-        //         dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Checker'
-        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-        //     }
-        // }
+        stage('OWASP FS SCAN') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Checker'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
 
 
         /*
@@ -60,41 +60,41 @@ pipeline {
         }
         */
         
-        // stage('Docker Build') {
-        //     steps {
-        //         script {
-        //             withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {   
-        //                 // Build, tag, and push the Docker image
-        //                 sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
-        //                 sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Push Image to Registry'){
-        //     steps{
-        //         script{
-        //             withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
-        //                 sh "docker push faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
-        //         }
-        //         }
-        //     }
-        // }
+        stage('Docker Build') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {   
+                        // Build, tag, and push the Docker image
+                        sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                        sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                    }
+                }
+            }
+        }
+        stage('Push Image to Registry'){
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh "docker push faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                }
+                }
+            }
+        }
 
-        // stage('Deploy to container') {
-        //     steps {
-        //         script {
-        //             // Stop and remove any existing container with the same name
-        //             sh """
-        //                 docker stop reddit-clone || true
-        //                 docker rm reddit-clone || true
-        //             """
+        stage('Deploy to container') {
+            steps {
+                script {
+                    // Stop and remove any existing container with the same name
+                    sh """
+                        docker stop reddit-clone || true
+                        docker rm reddit-clone || true
+                    """
                     
-        //             // Run the Docker container using the same image name and tag
-        //             sh "docker run -d --name reddit-clone -p 80:3000 faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
-        //         }
-        //     }
-        // }
+                    // Run the Docker container using the same image name and tag
+                    sh "docker run -d --name reddit-clone -p 80:3000 faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
+                }
+            }
+        }
 
     }
 
