@@ -338,4 +338,6 @@ Much better now.
 ![1724456260247](image/Readme/1724456260247.png)
 
 
-As a final thing, lets Ensure we handle failure, in this pipeline in the case of a failure i will revert the container
+As a final thing, lets Ensure we handle failure, in this pipeline in the case of a failure i will revert the container.
+
+I've made a mistake in Dockerfile knowingly to test the failure handling.

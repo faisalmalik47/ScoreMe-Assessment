@@ -120,11 +120,13 @@ pipeline {
                     }
                 if (previousBuildNumber) {
                     def imageTag = "${IMAGE_NAME}:${previousBuildNumber}"
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                         sh """
                             docker stop reddit-clone || true
                             docker rm reddit-clone || true
                         """
                         sh "docker run -d --name reddit-clone -p 80:3000 faisalmaliik/${imageTag}"
+                    }
                 }
                 else {
                 error "Previous successful build file not found or is empty. Cannot deploy."
