@@ -341,3 +341,12 @@ Much better now.
 As a final thing, lets Ensure we handle failure, in this pipeline in the case of a failure i will revert the container.
 
 I've made a mistake in Dockerfile knowingly to test the failure handling.
+
+![1724459953278](image/Readme/1724459953278.png)
+
+![1724459999356](image/Readme/1724459999356.png)
+
+
+As we can see below the current build number is 37, but in failure it reverted to the previous successfully build image which was done in build no. 36.
+
+![1724460098361](image/Readme/1724460098361.png)
