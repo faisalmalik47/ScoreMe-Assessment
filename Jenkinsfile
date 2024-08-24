@@ -11,7 +11,7 @@ pipeline {
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = 'reddit'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
-        TRIVY_OUTPUT_FILE = "trivy-scan-${env.BUILD_NUMBER}.html"
+        TRIVY_OUTPUT_FILE = "trivy-scan-${env.BUILD_NUMBER}.txt"
     }
 
     stages {
