@@ -6,7 +6,6 @@ pipeline {
         }
 
     environment {
-        // SLACK_CHANNEL = 'C07J983AQJV' // Slack channel ID
         SLACK_CREDENTIALS_ID = 'slack-token'
         SONARQUBE_SERVER = 'http://65.1.94.192:9000'
         SCANNER_HOME = tool 'sonar-scanner'
@@ -50,45 +49,7 @@ pipeline {
         //     }
         // }
 
-        // stage('Install Dependencies') {
-        //     steps {
-        //         script {
-        //             sh 'npm install'
-        //         }
-        //     }
-        // }       
 
-        // stage('Run Complexity Analysis') {
-        //     steps {
-        //         sh 'npm run plato'
-        //     }
-        // }
-
-        // stage('Archive Reports') {
-        //     steps {
-        //         archiveArtifacts artifacts: 'plato-report/**/*', allowEmptyArchive: true
-        //     }
-        // }
-
-        // stage('Publish Test Report') {
-        //     steps {
-        //         writeFile file: 'test-report/index.html', text: '<html><body><h1>Test Report</h1></body></html>'
-        //         publishHTML(target: [
-        //             reportDir: 'test-report',  // Directory where HTML files are located
-        //             reportFiles: 'index.html',      // Main HTML file to be displayed
-        //             keepAll: true,                  // Keep all reports
-        //             alwaysLinkToLastBuild: true,    // Link to the latest build's report
-        //             allowMissing: false             // Fail if report is missing
-        //         ])
-        //     }
-        // }
-        // stage('Allure Report') {
-        //     steps {
-        //         allure includeProperties: false, results: [[path: 'test-report']]
-        //     }
-        // }
-
-        // Uncomment the stages below if needed
         /*
         stage('Cyclomatic Complexity') {
             steps {
@@ -142,12 +103,34 @@ pipeline {
     post {
         success {
             script {
+                def previousBuildFile = '/var/lib/jenkins/previous_successful_build.txt'
+                def buildNumber = env.BUILD_NUMBER
+                sh "echo ${buildNumber} > ${previousBuildFile}"
                 slackSend(color: 'good', message: "Deployment on ${env.JOB_NAME} succeeded! Build Number - ${env.BUILD_NUMBER}, New codebase is live now. Job built by ${env.BUILD_USER_NAME} , Job URL:  ${env.BUILD_URL}")
+                sh "docker system prune -f"
             }
         }
         failure {
             script {
+                def previousBuildFile = '/var/lib/jenkins/previous_successful_build.txt'
+                def previousBuildNumber = ''
+                if (fileExists(previousBuildFile)) {
+                // Read the previous build number from the file
+                    previousBuildNumber = readFile(previousBuildFile).trim()
+                    }
+                if (previousBuildNumber) {
+                    def imageTag = "${IMAGE_NAME}:${previousBuildNumber}"
+                        sh """
+                            docker stop reddit-clone || true
+                            docker rm reddit-clone || true
+                        """
+                        sh "docker run -d --name reddit-clone -p 80:3000 faisalmaliik/${imageTag}"
+                }
+                else {
+                error "Previous successful build file not found or is empty. Cannot deploy."
+            }
                 slackSend(color: 'good', message: "Deployment on ${env.JOB_NAME} succeeded! Build Number - ${env.BUILD_NUMBER}, New codebase is live now.  Job built by ${env.BUILD_USER_NAME} , Job URL:  ${env.BUILD_URL}")
+                sh "docker system prune -f"
             }
         }
     }
