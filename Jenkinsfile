@@ -16,17 +16,16 @@ pipeline {
 
     stages {
 
-         stage('Clean Workspace') {
-            steps {
-                cleanWs()
-            }
-        }       
+        // stage('Clean Workspace') {
+        //     steps {
+        //         cleanWs()
+        //     }
+        // }
         stage('Checkout') {
             steps {
                 git 'https://github.com/faisalmalik47/ScoreMe-Assessment.git'
             }
         }
-
         stage('Code Quality') {
             steps {
                 script {
@@ -49,18 +48,13 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
-
-
-        /*
-        stage('Cyclomatic Complexity') {
-            steps {
-                script {
-                    sh 'lizard -i -m 10'
-                }
-            }
-        }
-        */
-        
+        // stage('Cyclomatic Complexity') {
+        //     steps {
+        //         script {
+        //             sh 'lizard -i -m 10'
+        //         }
+        //     }
+        // }
         stage('Docker Build') {
             steps {
                 script {
@@ -99,9 +93,15 @@ pipeline {
                         docker rm reddit-clone || true
                     """
                     
-                    // Run the Docker container using the same image name and tag
+                    // Run the Docker container using the same image name
                     sh "docker run -d --name reddit-clone -p 80:5173 faisalmaliik/${IMAGE_NAME}:${IMAGE_TAG}"
                 }
+            }
+        }
+        //Archives all the html and txt filescreated.
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: '**/*.html, **/*.txt', allowEmptyArchive: true
             }
         }
 
